@@ -12496,103 +12496,91 @@ until glueloop == false
  end)
 
  loophitbox = false
- --// BALL HITBOX REPLACEMENT (Nameless Admin)
+ cmd.add({"hitbox", "hbox"}, {"hitbox {amount}", "Makes everyones hitbox as much as you want"}, function(h, d)
+	 
+	if loophitbox == true then
+loophitbox = false
+	end
+ Username = h
+ Plr = getPlr(h)
+ 
+ wait();
+ 
+ Notify({
+ Description = "Hitbox changed";
+ Title = "Nameless Admin";
+ Duration = 5;
+ 
+ });
+	 _G.HeadSize = d
+	 _G.Disabled = true
 
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local LocalPlayer = Players.LocalPlayer
-
-local HitboxEnabled = false
-local HitboxSize = 10
-local HitboxConnection
-
-local function createBallHitbox(character)
-    local hrp = character:FindFirstChild("HumanoidRootPart")
-    if not hrp then return end
-
-    if hrp:FindFirstChild("BallHitbox") then
-        hrp.BallHitbox.Size = Vector3.new(HitboxSize, HitboxSize, HitboxSize)
-        return
-    end
-
-    local ball = Instance.new("Part")
-    ball.Name = "BallHitbox"
-    ball.Shape = Enum.PartType.Ball
-    ball.Size = Vector3.new(HitboxSize, HitboxSize, HitboxSize)
-    ball.Transparency = 0.9
-    ball.Material = Enum.Material.Neon
-    ball.BrickColor = BrickColor.new("White")
-    ball.CanCollide = false
-    ball.Massless = true
-    ball.Parent = hrp
-
-    local weld = Instance.new("WeldConstraint")
-    weld.Part0 = hrp
-    weld.Part1 = ball
-    weld.Parent = ball
-end
-
-local function removeBallHitbox(character)
-    local hrp = character and character:FindFirstChild("HumanoidRootPart")
-    if hrp and hrp:FindFirstChild("BallHitbox") then
-        hrp.BallHitbox:Destroy()
-    end
-end
-
- cmd.add({"hitbox","hbox"}, {"hitbox <player/all/others> <size>", "Creates a spherical hitbox"}, function(target, size)
-    HitboxSize = tonumber(size) or 10
-    HitboxEnabled = true
-
-    if HitboxConnection then
-        HitboxConnection:Disconnect()
-    end
-
-    HitboxConnection = RunService.Stepped:Connect(function()
-        if not HitboxEnabled then return end
-
-        for _, plr in ipairs(Players:GetPlayers()) do
-            if plr.Character then
-                if target == "all"
-                or (target == "others" and plr ~= LocalPlayer)
-                or plr.Name:lower():match("^"..target:lower()) then
-                    createBallHitbox(plr.Character)
-                end
-            end
-        end
-    end)
-
-    Notify({
-        Title = "Nameless Admin",
-        Description = "Ball hitbox enabled",
-        Duration = 5
-    })
+	 if _G.HeadSize == nil then
+_G.HeadSize = 10
+	 end
+	 
+	 loophitbox = true
+ 
+	 if Username == "all" or Username == "others" then
+			game:GetService("RunService").Stepped:Connect(function()
+				if loophitbox then
+		 for i,v in next, game:GetService('Players'):GetPlayers() do
+		 if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+		 v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+		 v.Character.HumanoidRootPart.Shape = Enum.PartType.Ball
+		 v.Character.HumanoidRootPart.Transparency = 0.9
+		 v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+		 v.Character.HumanoidRootPart.Material = "Neon"
+		 v.Character.HumanoidRootPart.CanCollide = false
+		 end
+		end
+	end
 end)
+ else
+			game:GetService("RunService").Stepped:Connect(function()
+								if loophitbox then
+		 Plr.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+		 Plr.Character.HumanoidRootPart.Shape = Enum.PartType.Ball
+		 Plr.Character.HumanoidRootPart.Transparency = 0.9
+		 Plr.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+		 Plr.Character.HumanoidRootPart.Material = "Neon"
+		 Plr.Character.HumanoidRootPart.CanCollide = false
 
- cmd.add({"unhitbox","unhbox"}, {"unhitbox", "Removes spherical hitbox"}, function(target)
-    HitboxEnabled = false
-
-    if HitboxConnection then
-        HitboxConnection:Disconnect()
-        HitboxConnection = nil
-    end
-
-    for _, plr in ipairs(Players:GetPlayers()) do
-        if plr.Character then
-            if target == "all"
-            or (target == "others" and plr ~= LocalPlayer)
-            or plr.Name:lower():match("^"..target:lower()) then
-                removeBallHitbox(plr.Character)
-            end
-        end
-    end
-
-    Notify({
-        Title = "Nameless Admin",
-        Description = "Ball hitbox disabled",
-        Duration = 5
-    })
+end
 end)
-
+ end
+ end)
+ 
+ 
+ cmd.add({"unhitbox", "unhbox"}, {"unhitbox", "Disables hitbox"}, function(h)
+	 Username = h
+	 Plr = getPlr(h)
+ 
+		 _G.HeadSize = 5
+		 _G.Disabled = false
+		 
+		 loophitbox = false
+	 
+		 if Username == "all" or Username == "others" then
+			 for i,v in next, game:GetService('Players'):GetPlayers() do
+			 if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+			 v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+			 v.Character.HumanoidRootPart.Shape = Enum.PartType.Ball
+			 v.Character.HumanoidRootPart.Transparency = 1
+			 v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+			 v.Character.HumanoidRootPart.Material = "Neon"
+			 v.Character.HumanoidRootPart.CanCollide = false
+			 end
+	 end
+	 else
+			 Plr.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+			 Plr.Character.HumanoidRootPart.Shape = Enum.PartType.Ball
+			 Plr.Character.HumanoidRootPart.Transparency = 1
+			 Plr.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+			 Plr.Character.HumanoidRootPart.Material = "Neon"
+			 Plr.Character.HumanoidRootPart.CanCollide = false
+	 end
+ end)
  
  cmd.add({"breakcars", "bcars"}, {"breakcars (bcars)", "Breaks any car"}, function()
 	 
