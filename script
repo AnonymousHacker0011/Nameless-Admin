@@ -12528,6 +12528,7 @@ _G.HeadSize = 10
 		 if v.Name ~= game:GetService('Players').LocalPlayer.Name then
 		 v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
 		 v.Character.HumanoidRootPart.Shape = Enum.PartType.Ball
+		 v.Character.HumanoidRootPart.Color3 = Color3.fromRGB(255, 255, 255)
 		 v.Character.HumanoidRootPart.Transparency = 0.9
 		 v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
 		 v.Character.HumanoidRootPart.Material = "Neon"
@@ -12541,6 +12542,7 @@ end)
 								if loophitbox then
 		 Plr.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
 		 Plr.Character.HumanoidRootPart.Shape = Enum.PartType.Ball
+		 Plr.Character.HumanoidRootPart.Color3 = Color3.fromRGB(255, 255, 255)
 		 Plr.Character.HumanoidRootPart.Transparency = 0.9
 		 Plr.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
 		 Plr.Character.HumanoidRootPart.Material = "Neon"
@@ -12566,6 +12568,7 @@ end)
 			 if v.Name ~= game:GetService('Players').LocalPlayer.Name then
 			 v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
 			 v.Character.HumanoidRootPart.Shape = Enum.PartType.Ball
+			 v.Character.HumanoidRootPart.Color3 = Color3.fromRGB(255, 255, 255)
 			 v.Character.HumanoidRootPart.Transparency = 1
 			 v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
 			 v.Character.HumanoidRootPart.Material = "Neon"
@@ -12575,6 +12578,7 @@ end)
 	 else
 			 Plr.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
 			 Plr.Character.HumanoidRootPart.Shape = Enum.PartType.Ball
+			 Plr.Character.HumanoidRootPart.Color3 = Color3.fromRGB(255, 255, 255)
 			 Plr.Character.HumanoidRootPart.Transparency = 1
 			 Plr.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
 			 Plr.Character.HumanoidRootPart.Material = "Neon"
