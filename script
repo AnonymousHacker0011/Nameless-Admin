@@ -595,18 +595,18 @@
 			 end
 			 
 		 elseif arg == "others" then
-			 for _, plr in pairs(playerList) do
-				 if plr ~= localPlayer then
-					 table.insert(players, plr)
-				 end
-			 end
+	for _, plr in pairs(playerList) do
+		if plr ~= localPlayer then
+			table.insert(players, plr)
+		end
+	end
 
 		 elseif arg == "nonteam" then
-			 for _, plr in pairs(playerList) do
-				 if plr.Team ~= localPlayer.Team then
-					 table.insert(players, plr)
-				 end
-			 end
+	for _, plr in pairs(playerList) do
+		if plr ~= localPlayer and plr.Team ~= localPlayer.Team then
+			table.insert(players, plr)
+		end
+	end
  
 		 elseif arg == "random" then
 			 table.insert(players, playerList[math.random(1, #playerList)])
