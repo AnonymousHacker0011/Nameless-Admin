@@ -602,11 +602,23 @@
 			 end
 
 		 elseif arg == "nonteam" then
-			 for _, plr in pairs(playerList) do
-				 if plr ~= localPlayer and plr.Team ~= localPlayer.Team then
-					 table.insert(players, plr)
-				 end
-			 end
+	local myTeam = localPlayer.Team
+	local myTeamColor = localPlayer.TeamColor
+
+	for _, plr in pairs(playerList) do
+		if plr ~= localPlayer then
+			-- If teams exist, compare teams
+			if myTeam and plr.Team then
+				if plr.Team ~= myTeam then
+					table.insert(players, plr)
+				end
+
+			-- Fallback to TeamColor comparison
+			elseif plr.TeamColor ~= myTeamColor then
+				table.insert(players, plr)
+			end
+		end
+	end
 			 
 		 elseif arg == "random" then
 			 table.insert(players, playerList[math.random(1, #playerList)])
