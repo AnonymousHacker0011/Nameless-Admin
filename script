@@ -578,8 +578,20 @@
  sin = m.sin
  tan = m.tan
  cos = m.cos
+
+ local function getNonTeamPlayers()
+	 local returns = {}
+	 local team = speaker.Team
+
+	 for _, plr in pairs(Players:GetPlayers()) do
+		 if plr ~= speaker and plr.Team ~= team then
+			 table.insert(returns, plr)
+		 end
+	 end
+
+	 return returns
+ end
  
- --[[ PLAYER FUNCTIONS ]]--
  argument = {}
  argument.getPlayers = function(str)
 	 local playerNames, players = lib.parseText(str, opt.tupleSeparator), {}
@@ -602,11 +614,9 @@
 	end
 
 		 elseif arg == "nonteam" then
-	for _, plr in pairs(playerList) do
-		if plr ~= localPlayer and plr.Team ~= localPlayer.Team then
+	for _, plr in pairs(getNonTeamPlayers()) do
 			table.insert(players, plr)
 		end
-	end
  
 		 elseif arg == "random" then
 			 table.insert(players, playerList[math.random(1, #playerList)])
